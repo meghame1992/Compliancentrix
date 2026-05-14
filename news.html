@@ -1,0 +1,658 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>News & Insights | Compliancentrix</title>
+<meta name="description" content="India compliance news, regulatory updates and insights for law graduates and compliance professionals. By Compliancentrix."/>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet"/>
+<style>
+  :root {
+    --navy: #0C3557;
+    --navy-mid: #164e74;
+    --blue: #1A6FA0;
+    --blue-light: #2E8BC0;
+    --gold: #C9933A;
+    --gold-light: #E8B45C;
+    --cream: #F7F4EE;
+    --cream-dark: #EDE9DF;
+    --text: #1a1a1a;
+    --text-muted: #5a5a5a;
+    --white: #ffffff;
+  }
+
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  html { scroll-behavior: smooth; }
+
+  body {
+    font-family: 'DM Sans', sans-serif;
+    background: var(--cream);
+    color: var(--text);
+    font-size: 16px;
+    line-height: 1.7;
+    overflow-x: hidden;
+  }
+
+  /* NAV */
+  nav {
+    position: fixed;
+    top: 0; left: 0; right: 0;
+    z-index: 100;
+    background: rgba(12, 53, 87, 0.97);
+    backdrop-filter: blur(8px);
+    padding: 0 2rem;
+    height: 60px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+  .nav-brand {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.1rem;
+    color: var(--white);
+    text-decoration: none;
+  }
+  .nav-brand span { color: var(--gold-light); }
+  .nav-links { display: flex; align-items: center; gap: 1.5rem; }
+  .nav-link {
+    color: #a0bdd0;
+    font-size: 13px;
+    text-decoration: none;
+    transition: color 0.2s;
+  }
+  .nav-link:hover { color: var(--white); }
+  .nav-cta {
+    background: var(--gold);
+    color: var(--white);
+    padding: 8px 20px;
+    border-radius: 4px;
+    font-size: 13px;
+    font-weight: 500;
+    text-decoration: none;
+    transition: background 0.2s;
+  }
+  .nav-cta:hover { background: var(--gold-light); }
+
+  /* PAGE HEADER */
+  .page-header {
+    background: var(--navy);
+    padding: 100px 2rem 60px;
+    position: relative;
+    overflow: hidden;
+  }
+  .page-header::before {
+    content: '';
+    position: absolute;
+    top: -80px; right: -80px;
+    width: 300px; height: 300px;
+    border-radius: 50%;
+    background: var(--blue);
+    opacity: 0.12;
+  }
+  .page-header-inner {
+    max-width: 860px;
+    margin: 0 auto;
+    position: relative;
+    z-index: 1;
+  }
+  .page-eyebrow {
+    display: inline-block;
+    background: rgba(201, 147, 58, 0.15);
+    border: 1px solid rgba(201, 147, 58, 0.35);
+    color: var(--gold-light);
+    font-size: 11px;
+    font-weight: 500;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    padding: 5px 14px;
+    border-radius: 2px;
+    margin-bottom: 1.25rem;
+  }
+  .page-header h1 {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(2rem, 4vw, 3rem);
+    color: var(--white);
+    font-weight: 700;
+    margin-bottom: 0.75rem;
+    line-height: 1.2;
+  }
+  .page-header p {
+    color: #a0bdd0;
+    font-size: 1rem;
+    font-weight: 300;
+    max-width: 520px;
+  }
+
+  /* FILTERS */
+  .filters {
+    background: var(--white);
+    border-bottom: 1px solid var(--cream-dark);
+    padding: 0 2rem;
+    position: sticky;
+    top: 60px;
+    z-index: 50;
+  }
+  .filters-inner {
+    max-width: 860px;
+    margin: 0 auto;
+    display: flex;
+    gap: 0;
+    overflow-x: auto;
+  }
+  .filter-btn {
+    padding: 14px 20px;
+    font-family: 'DM Sans', sans-serif;
+    font-size: 13px;
+    font-weight: 500;
+    color: var(--text-muted);
+    background: none;
+    border: none;
+    border-bottom: 2px solid transparent;
+    cursor: pointer;
+    white-space: nowrap;
+    transition: color 0.2s, border-color 0.2s;
+  }
+  .filter-btn.active, .filter-btn:hover {
+    color: var(--navy);
+    border-bottom-color: var(--gold);
+  }
+
+  /* MAIN LAYOUT */
+  .main {
+    max-width: 860px;
+    margin: 0 auto;
+    padding: 3rem 2rem;
+    display: grid;
+    grid-template-columns: 1fr 280px;
+    gap: 3rem;
+    align-items: start;
+  }
+  @media (max-width: 720px) {
+    .main { grid-template-columns: 1fr; }
+    .sidebar { display: none; }
+  }
+
+  /* ARTICLE CARD — FEATURED */
+  .featured-card {
+    background: var(--white);
+    border: 1px solid var(--cream-dark);
+    border-radius: 8px;
+    overflow: hidden;
+    margin-bottom: 2rem;
+    transition: box-shadow 0.2s;
+  }
+  .featured-card:hover { box-shadow: 0 8px 32px rgba(12,53,87,0.1); }
+  .featured-banner {
+    background: var(--navy);
+    padding: 1.5rem 2rem;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 1rem;
+  }
+  .featured-label {
+    font-size: 10px;
+    font-weight: 600;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    color: var(--gold-light);
+    background: rgba(201,147,58,0.15);
+    border: 1px solid rgba(201,147,58,0.3);
+    padding: 4px 10px;
+    border-radius: 2px;
+  }
+  .featured-date {
+    font-size: 12px;
+    color: #7a9ab0;
+    font-weight: 300;
+  }
+  .featured-body { padding: 2rem; }
+  .article-category {
+    font-size: 11px;
+    font-weight: 600;
+    letter-spacing: 1.5px;
+    text-transform: uppercase;
+    color: var(--gold);
+    margin-bottom: 0.75rem;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+  .article-category::before {
+    content: '';
+    width: 20px;
+    height: 1px;
+    background: var(--gold);
+    display: inline-block;
+  }
+  .featured-body h2 {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.6rem;
+    color: var(--navy);
+    font-weight: 700;
+    line-height: 1.3;
+    margin-bottom: 1rem;
+  }
+  .article-meta {
+    display: flex;
+    gap: 1.5rem;
+    margin-bottom: 1.25rem;
+    flex-wrap: wrap;
+  }
+  .meta-item {
+    font-size: 12px;
+    color: var(--text-muted);
+    display: flex;
+    align-items: center;
+    gap: 5px;
+  }
+  .article-excerpt {
+    font-size: 15px;
+    color: var(--text-muted);
+    line-height: 1.8;
+    font-weight: 300;
+    margin-bottom: 1.5rem;
+    border-left: 3px solid var(--gold);
+    padding-left: 1rem;
+    font-style: italic;
+  }
+
+  /* ARTICLE FULL BODY */
+  .article-full {
+    display: none;
+  }
+  .article-full.open {
+    display: block;
+  }
+  .article-full p {
+    font-size: 15px;
+    color: var(--text);
+    line-height: 1.9;
+    margin-bottom: 1.25rem;
+    font-weight: 300;
+  }
+  .article-full p strong {
+    color: var(--navy);
+    font-weight: 500;
+  }
+  .penalty-box {
+    background: var(--cream);
+    border: 1px solid var(--cream-dark);
+    border-radius: 6px;
+    padding: 1.25rem 1.5rem;
+    margin: 1.5rem 0;
+  }
+  .penalty-box h4 {
+    font-size: 11px;
+    font-weight: 600;
+    letter-spacing: 1.5px;
+    text-transform: uppercase;
+    color: var(--text-muted);
+    margin-bottom: 1rem;
+  }
+  .penalty-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0.6rem 0;
+    border-bottom: 1px solid var(--cream-dark);
+    font-size: 14px;
+  }
+  .penalty-row:last-child { border-bottom: none; }
+  .penalty-year { color: var(--text-muted); font-weight: 400; }
+  .penalty-amount { color: var(--navy); font-weight: 500; font-family: 'Playfair Display', serif; }
+  .penalty-reason { color: var(--text-muted); font-size: 13px; font-weight: 300; flex: 1; margin: 0 1rem; }
+  .article-full blockquote {
+    border-left: 3px solid var(--gold);
+    padding: 0.75rem 1.25rem;
+    margin: 1.5rem 0;
+    font-style: italic;
+    color: var(--navy);
+    font-size: 15px;
+    line-height: 1.7;
+    background: rgba(201,147,58,0.05);
+    border-radius: 0 4px 4px 0;
+  }
+  .sources {
+    margin-top: 2rem;
+    padding-top: 1.5rem;
+    border-top: 1px solid var(--cream-dark);
+  }
+  .sources h4 {
+    font-size: 11px;
+    font-weight: 600;
+    letter-spacing: 1.5px;
+    text-transform: uppercase;
+    color: var(--text-muted);
+    margin-bottom: 0.75rem;
+  }
+  .sources a {
+    display: block;
+    font-size: 13px;
+    color: var(--blue);
+    text-decoration: none;
+    margin-bottom: 0.4rem;
+    font-weight: 300;
+  }
+  .sources a:hover { color: var(--gold); text-decoration: underline; }
+
+  .read-more-btn {
+    background: none;
+    border: 1px solid var(--navy);
+    color: var(--navy);
+    padding: 10px 24px;
+    border-radius: 4px;
+    font-family: 'DM Sans', sans-serif;
+    font-size: 13px;
+    font-weight: 500;
+    cursor: pointer;
+    transition: all 0.2s;
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+  }
+  .read-more-btn:hover {
+    background: var(--navy);
+    color: var(--white);
+  }
+  .read-more-btn .arrow { transition: transform 0.2s; }
+  .read-more-btn.open .arrow { transform: rotate(180deg); }
+
+  .article-tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 6px;
+    margin-top: 1.5rem;
+    padding-top: 1.5rem;
+    border-top: 1px solid var(--cream-dark);
+  }
+  .tag {
+    background: var(--cream);
+    border: 1px solid var(--cream-dark);
+    color: var(--text-muted);
+    font-size: 11px;
+    font-weight: 500;
+    padding: 4px 10px;
+    border-radius: 2px;
+    letter-spacing: 0.5px;
+  }
+
+  /* COMING SOON CARD */
+  .coming-soon-card {
+    background: var(--white);
+    border: 1px dashed var(--cream-dark);
+    border-radius: 8px;
+    padding: 2rem;
+    text-align: center;
+    color: var(--text-muted);
+    font-size: 14px;
+    font-weight: 300;
+  }
+  .coming-soon-card .icon { font-size: 2rem; margin-bottom: 0.75rem; }
+  .coming-soon-card p { line-height: 1.7; }
+
+  /* SIDEBAR */
+  .sidebar { position: sticky; top: 120px; }
+  .sidebar-card {
+    background: var(--white);
+    border: 1px solid var(--cream-dark);
+    border-radius: 8px;
+    padding: 1.5rem;
+    margin-bottom: 1.5rem;
+  }
+  .sidebar-card h3 {
+    font-family: 'Playfair Display', serif;
+    font-size: 1rem;
+    color: var(--navy);
+    margin-bottom: 1rem;
+    font-weight: 600;
+    padding-bottom: 0.75rem;
+    border-bottom: 1px solid var(--cream-dark);
+  }
+  .sidebar-card p {
+    font-size: 13px;
+    color: var(--text-muted);
+    line-height: 1.7;
+    font-weight: 300;
+    margin-bottom: 1rem;
+  }
+  .sidebar-btn {
+    display: block;
+    background: var(--gold);
+    color: var(--white);
+    text-align: center;
+    padding: 10px;
+    border-radius: 4px;
+    font-size: 13px;
+    font-weight: 500;
+    text-decoration: none;
+    transition: background 0.2s;
+  }
+  .sidebar-btn:hover { background: var(--gold-light); }
+  .topic-list { list-style: none; }
+  .topic-list li {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0.5rem 0;
+    border-bottom: 1px solid var(--cream-dark);
+    font-size: 13px;
+    color: var(--text-muted);
+    font-weight: 300;
+  }
+  .topic-list li:last-child { border-bottom: none; }
+  .topic-count {
+    background: var(--cream);
+    color: var(--navy);
+    font-size: 11px;
+    font-weight: 500;
+    padding: 2px 8px;
+    border-radius: 10px;
+  }
+
+  /* FOOTER */
+  footer {
+    background: #071e2e;
+    padding: 2rem;
+    text-align: center;
+    margin-top: 4rem;
+  }
+  footer p { font-size: 13px; color: #4a6a7a; font-weight: 300; }
+  footer a { color: var(--gold-light); text-decoration: none; }
+
+  /* REVEAL */
+  .reveal { opacity: 0; transform: translateY(20px); transition: opacity 0.6s ease, transform 0.6s ease; }
+  .reveal.visible { opacity: 1; transform: translateY(0); }
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <a href="index.html" class="nav-brand">Complian<span>centrix</span></a>
+  <div class="nav-links">
+    <a href="index.html" class="nav-link">Home</a>
+    <a href="news.html" class="nav-link" style="color:#fff;">News & Insights</a>
+    <a href="https://topmate.io/megha_agrawal17/" target="_blank" class="nav-cta">Book Free Call</a>
+  </div>
+</nav>
+
+<!-- PAGE HEADER -->
+<div class="page-header">
+  <div class="page-header-inner">
+    <div class="page-eyebrow">News & Insights</div>
+    <h1>India Compliance Intelligence</h1>
+    <p>Real names, real numbers, real consequences. Weekly compliance news for law graduates and professionals navigating India's regulatory landscape.</p>
+  </div>
+</div>
+
+<!-- FILTERS -->
+<div class="filters">
+  <div class="filters-inner">
+    <button class="filter-btn active">All</button>
+    <button class="filter-btn">RBI & Banking</button>
+    <button class="filter-btn">SEBI</button>
+    <button class="filter-btn">KYC & AML</button>
+    <button class="filter-btn">Fintech</button>
+    <button class="filter-btn">Penalties</button>
+  </div>
+</div>
+
+<!-- MAIN -->
+<div class="main">
+  <div class="articles">
+
+    <!-- ARTICLE 1 — YES Bank -->
+    <div class="featured-card reveal">
+      <div class="featured-banner">
+        <span class="featured-label">Latest · Article #7</span>
+        <span class="featured-date">14 May 2026</span>
+      </div>
+      <div class="featured-body">
+        <div class="article-category">RBI & Banking · KYC & AML</div>
+        <h2>YES Bank's Third Consecutive Annual Penalty — And What It Signals About Compliance Culture</h2>
+        <div class="article-meta">
+          <span class="meta-item">⏱ 4 min read</span>
+          <span class="meta-item">🏦 YES Bank · RBI · CKYCR</span>
+          <span class="meta-item">📍 India</span>
+        </div>
+        <div class="article-excerpt">
+          "Three years. Three different compliance failures. The fine amounts don't matter as much as what they're telling you about what's happening inside."
+        </div>
+
+        <!-- READ MORE TOGGLE -->
+        <button class="read-more-btn" id="toggle-art1" onclick="toggleArticle('art1', 'toggle-art1')">
+          Read full article <span class="arrow">↓</span>
+        </button>
+
+        <!-- FULL ARTICLE -->
+        <div class="article-full" id="art1">
+          <br/>
+          <p>On <strong>8 May 2026</strong>, the Reserve Bank of India imposed a monetary penalty of <strong>₹31.80 lakh on YES Bank</strong> for failing to implement the KYC Identifier system of the Central KYC Records Registry — a mandatory requirement for every bank establishing account-based relationships with customers.</p>
+
+          <p>The requirement isn't new. The Central KYC Records Registry — CKYCR — exists specifically so that customers don't have to submit KYC documents repeatedly across institutions. A bank collects KYC once, uploads it to CKYCR, and every other institution can retrieve the verified data using a unique identifier. Simple and efficient.</p>
+
+          <p>The RBI found the gap during a statutory inspection reviewing the bank's financial position as of <strong>March 31, 2025</strong>. A show-cause notice was issued. YES Bank responded. The RBI considered the response — and fined them anyway.</p>
+
+          <p>The same day, RBI also fined <strong>Hinduja Housing Finance ₹1.80 lakh</strong> for governance failures — specifically for changing more than 30% of its directors without obtaining prior RBI approval.</p>
+
+          <p>The fines are small. That's not the story.</p>
+
+          <div class="penalty-box">
+            <h4>YES Bank — Three Years of RBI Penalties</h4>
+            <div class="penalty-row">
+              <span class="penalty-year">May 2024</span>
+              <span class="penalty-amount">₹91 lakh</span>
+              <span class="penalty-reason">Customer service failures & unauthorised internal account operations</span>
+            </div>
+            <div class="penalty-row">
+              <span class="penalty-year">May 2025</span>
+              <span class="penalty-amount">₹29.60 lakh</span>
+              <span class="penalty-reason">Disclosure lapses in financial statements</span>
+            </div>
+            <div class="penalty-row">
+              <span class="penalty-year">May 2026</span>
+              <span class="penalty-amount">₹31.80 lakh</span>
+              <span class="penalty-reason">KYC non-compliance — failure to use CKYCR identifier</span>
+            </div>
+          </div>
+
+          <p>The story is pattern. Three consecutive years. Three different compliance failures.</p>
+
+          <p>YES Bank's stock has rallied <strong>13% in recent weeks</strong> on strong Q4 results. Its market capitalisation sits near <strong>₹719 billion</strong>. The business is recovering. But regulators don't look at stock charts when they conduct supervisory inspections. They look at whether the controls work.</p>
+
+          <blockquote>A KYC system that's been mandatory for years and still isn't implemented is not a technical oversight. It's a compliance culture question.</blockquote>
+
+          <div class="sources">
+            <h4>Sources</h4>
+            <a href="https://www.psuconnect.in/bank-news/yes-bank-receives-31-80-lakh-rbi-penalty-over-kyc-compliance-lapse" target="_blank" rel="noopener">PSU Connect — YES Bank Receives ₹31.80 Lakh RBI Penalty Over KYC Compliance Lapse</a>
+            <a href="https://www.livelawbiz.com/banking-nbfc/rbi-penalises-yes-bank-and-hinduja-housing-finance-limited-for-compliance-failure-533580" target="_blank" rel="noopener">LiveLaw Biz — RBI Penalises Yes Bank and Hinduja Housing Finance</a>
+            <a href="https://website.rbi.org.in/documents/d/rbi/pr355202526_rbi" target="_blank" rel="noopener">RBI Official Press Release — Monetary Penalty on Yes Bank Limited</a>
+          </div>
+        </div>
+
+        <div class="article-tags">
+          <span class="tag">RBI</span>
+          <span class="tag">YES Bank</span>
+          <span class="tag">KYC</span>
+          <span class="tag">CKYCR</span>
+          <span class="tag">Banking Compliance</span>
+          <span class="tag">Regulatory Penalty</span>
+          <span class="tag">India</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- PLACEHOLDER — MORE ARTICLES COMING -->
+    <div class="coming-soon-card reveal">
+      <div class="icon">📰</div>
+      <p>More articles are published every Wednesday.<br/>Follow <a href="https://www.linkedin.com/in/megha-agrawal" target="_blank" style="color:var(--gold);font-weight:500;">Compliancentrix on LinkedIn</a> to get notified when the next issue drops.</p>
+    </div>
+
+  </div>
+
+  <!-- SIDEBAR -->
+  <aside class="sidebar">
+    <div class="sidebar-card">
+      <h3>1:1 Compliance Mentoring</h3>
+      <p>Law graduate looking to break into compliance? Book a free 15-minute intro call with Megha.</p>
+      <a href="https://topmate.io/megha_agrawal17/" target="_blank" class="sidebar-btn">Book free call →</a>
+    </div>
+
+    <div class="sidebar-card">
+      <h3>Topics Covered</h3>
+      <ul class="topic-list">
+        <li>RBI & Banking <span class="topic-count">3</span></li>
+        <li>KYC & AML <span class="topic-count">2</span></li>
+        <li>SEBI <span class="topic-count">1</span></li>
+        <li>Fintech <span class="topic-count">1</span></li>
+        <li>Governance <span class="topic-count">1</span></li>
+      </ul>
+    </div>
+
+    <div class="sidebar-card">
+      <h3>About Compliancentrix</h3>
+      <p>Weekly compliance intelligence for India's next generation of compliance professionals. Written by a practising compliance expert based in Bengaluru.</p>
+      <a href="index.html" style="font-size:13px;color:var(--blue);text-decoration:none;">← Back to main site</a>
+    </div>
+  </aside>
+</div>
+
+<!-- FOOTER -->
+<footer>
+  <p>© 2026 Compliancentrix · Bengaluru, India · <a href="mailto:info@compliancetrix.com">info@compliancetrix.com</a></p>
+</footer>
+
+<script>
+  // Reveal on scroll
+  const reveals = document.querySelectorAll('.reveal');
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(e => {
+      if (e.isIntersecting) { e.target.classList.add('visible'); observer.unobserve(e.target); }
+    });
+  }, { threshold: 0.1 });
+  reveals.forEach(r => observer.observe(r));
+
+  // Toggle article
+  function toggleArticle(id, btnId) {
+    const article = document.getElementById(id);
+    const btn = document.getElementById(btnId);
+    const isOpen = article.classList.contains('open');
+    article.classList.toggle('open');
+    btn.classList.toggle('open');
+    btn.innerHTML = isOpen
+      ? 'Read full article <span class="arrow">↓</span>'
+      : 'Collapse article <span class="arrow">↓</span>';
+  }
+
+  // Filter buttons (UI only — ready for future filtering)
+  document.querySelectorAll('.filter-btn').forEach(btn => {
+    btn.addEventListener('click', () => {
+      document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
+      btn.classList.add('active');
+    });
+  });
+</script>
+
+</body>
+</html>
